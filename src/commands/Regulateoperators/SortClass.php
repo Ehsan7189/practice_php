@@ -10,7 +10,7 @@ class SortClass
     {
         $array = $books;
         usort($array, function ($a, $b) {
-            return $a['order'] - $b['order'];
+            return $a['publishDate'] - $b['publishDate'];
         });
         $books  = $array;
 
