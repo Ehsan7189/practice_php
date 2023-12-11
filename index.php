@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'./composer.json';
+require_once __DIR__.'./vendor/compo0.json';
 
 
 
