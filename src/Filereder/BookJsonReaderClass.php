@@ -1,7 +1,8 @@
 <?php
 
-class BookJsonReaderClass
+namespace Lenovo\Assignment\Filereder;
 
+class BookJsonReaderClass
 {
 
     public $file_path;
@@ -16,5 +17,4 @@ class BookJsonReaderClass
         $this->books = $data['books'];
 
     }
-
 }

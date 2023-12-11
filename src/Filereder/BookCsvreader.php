@@ -1,6 +1,8 @@
 <?php
 
-class BookCsvReaderClass
+namespace Lenovo\Assignment\Filereder;
+
+class BookCsvreader
 {
     public $file_path ;
     public $csv_books;
@@ -17,6 +19,4 @@ class BookCsvReaderClass
 
 
     }
-
-
 }
