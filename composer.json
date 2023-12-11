@@ -1,0 +1,17 @@
+{
+    "name": "lenovo/assignment",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lenovo\\Assignment\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ehsan sayyadi",
+            "email": "ehsansayadi7189@gamil.com"
+        }
+    ],
+    "require": {}
+}
