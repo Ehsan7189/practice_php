@@ -13,7 +13,7 @@ class Commandreader
     {
 
         $json = file_get_contents($file_path, true);
-        $data = json_decode($json);
+        $data = json_decode($json,true);
         $this->command = $data['command_name'];
         $this->parametrs = $data['parameters'];
 
