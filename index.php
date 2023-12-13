@@ -1,6 +1,8 @@
 <?php
 
-require_once __DIR__.'./vendor/compo0.json';
+require_once __DIR__.'./vendor/composer.json';
+
+use Lenovo\Assignment\Filereder\Commandreader;
 
 
 
