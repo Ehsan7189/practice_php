@@ -11,10 +11,10 @@ class FilterClass
     public $parametr;
     public array$filtered;
     public array$books;
-//    public array$filterd_books;
+    public array$filterd_books;
 
 
-    public function __construct(array$parametrs, $parametr, $filtered)
+    public function __construct(array$parametrs, $parametr, $filtered, $books, $filterd_books)
     {
 
         foreach ($parametrs as $key=> $val){
@@ -24,13 +24,29 @@ class FilterClass
                 array_push($filtered,$value);
             }
         }
+        $filterd_books = FilterClass::filtering($books, $parametr, $filtered);
     }
 
-    public static function filtering():void
-    {
+    public static function filtering(array$books, $parametr, $filter_list){
 
-        for ($i = 0; count($this->books) <= $i; $i++){}
+        for ($i = 0; count($books) <= $i; $i++)
+        {
 
+            if ($books[$i][$parametr] === $filter_list[$i])
+            {
+
+                continue;
+
+            }
+            else
+            {
+
+                unset($books[$i]);
+
+            }
+
+        }
+        return$books;
     }
 
 }
