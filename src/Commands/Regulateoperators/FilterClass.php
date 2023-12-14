@@ -8,39 +8,34 @@ class FilterClass
 {
 
     public array $parametrs;
-    public $parametr;
+    public array$command_parametr;
     public array$filtered;
     public array$books;
     public array$filterd_books;
 
-
-    public function __construct(array$parametrs, $parametr, $filtered, $books, $filterd_books)
+    public function __construct(array$parametrs, $command_parametr, $filtered, $books, $filterd_books)
     {
-
         foreach ($parametrs as $key=> $val){
-
-            $parametr = $key;
-            foreach ($val as $value){
-                array_push($filtered,$value);
-            }
+            $command_parametr[] = $key;
+            $filtered[$key]=$val;
         }
-        $filterd_books = FilterClass::filtering($books, $parametr, $filtered);
     }
-
-    public static function filtering(array$books, $parametr, $filter_list)
+    public  function filtering(array$books, $parametr, array$filter_list)
     {
-        for ($i = 0; count($books) <= $i; $i++)
+        $filtered_books=[];
+        foreach ($filter_list as $param => $value)
         {
-
-            if ($books[$i][$parametr] === $filter_list[$i])
+            foreach ($books as $book)
             {
-                continue;
-            }
-            else
-            {
-                unset($books[$i]);
+                if (in_array($book[$param], $value))
+                {
+                    $filtered_books[] = $book;
+                }
+                else
+                {continue;}
             }
         }
-        return$books;
+        $this->filtered = $filtered_books;
     }
 }
+
