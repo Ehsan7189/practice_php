@@ -2,17 +2,22 @@
 
 namespace Lenovo\Assignment\Validation;
 
+use mysql_xdevapi\Exception;
+
 class ParametrValidation
 {
+    public array $main_file;
     public $valid = [];
-    public $authors;
-
+    public $isbn;
+    public $page;
+    public $author;
+    public $book_name;
 
     public function __construct(
-        public $isbn,
-        public $page,
-        public $author,
-        public $book_name,
+        $isbn,
+        $page,
+        $author,
+        $book_name,
 
     )
     {
@@ -26,11 +31,13 @@ class ParametrValidation
                 continue;
             } else {
 
-                echo 'One of the attributes related to the book has been entered incorrectly';
+                throw new Exception('One of the attributes related to the book has been entered incorrectly');
 
             }
+
         }
     }
+
 
     private function isbnValidation($isbn)
     {
