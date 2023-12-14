@@ -27,26 +27,20 @@ class FilterClass
         $filterd_books = FilterClass::filtering($books, $parametr, $filtered);
     }
 
-    public static function filtering(array$books, $parametr, $filter_list){
-
+    public static function filtering(array$books, $parametr, $filter_list)
+    {
         for ($i = 0; count($books) <= $i; $i++)
         {
 
             if ($books[$i][$parametr] === $filter_list[$i])
             {
-
                 continue;
-
             }
             else
             {
-
                 unset($books[$i]);
-
             }
-
         }
         return$books;
     }
-
 }
