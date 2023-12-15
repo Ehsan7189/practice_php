@@ -7,40 +7,35 @@ use Lenovo\Assignment\Filereder\Commandreader;
 class FilterClass
 {
 
-    public array $parametrs;
-    public $parametr;
-    public array$filtered;
-    public array$books;
-    public array$filterd_books;
+    public array $command_name;
+    private array $command_parametrs;
+    public array $filtered_books;
+    public array $books;
+    public array $command_filters;
 
-
-    public function __construct(array$parametrs, $parametr, $filtered, $books, $filterd_books)
+    public function __construct(array $command_name, $books)
     {
-
-        foreach ($parametrs as $key=> $val){
-
-            $parametr = $key;
-            foreach ($val as $value){
-                array_push($filtered,$value);
-            }
+        foreach ($command_name as $key => $val) {
+            $this->command_parametr[] = $key;
+            $this->command_filters[$key] = $val;
         }
-        $filterd_books = FilterClass::filtering($books, $parametr, $filtered);
+        $this->filtering($books, $this->command_parametrs, $this->command_filters);
+
     }
 
-    public static function filtering(array$books, $parametr, $filter_list)
+    private function filtering(array $books, $parametr, array $filter_list)
     {
-        for ($i = 0; count($books) <= $i; $i++)
-        {
-
-            if ($books[$i][$parametr] === $filter_list[$i])
-            {
-                continue;
-            }
-            else
-            {
-                unset($books[$i]);
+        $filtered_books = [];
+        foreach ($filter_list as $param => $value) {
+            foreach ($books as $book) {
+                if (in_array($book[$param], $value)) {
+                    $filtered_books[] = $book;
+                } else {
+                    continue;
+                }
             }
         }
-        return$books;
+        $this->filtered_books = $filtered_books;
     }
 }
+
