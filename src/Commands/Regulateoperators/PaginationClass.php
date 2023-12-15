@@ -5,21 +5,19 @@ namespace Lenovo\Assignment\Commands\Regulateoperators;
 class PaginationClass
 {
 
+
     public array $pagination_books;
     public $books;
-    public $per_page = 4;
     public $page_show;
 
-    public function __construct($books)
+
+    public function __construct($books, public int $page_number=1, public $per_page = 4)
     {
         $this->pagination_books = array_chunk($books, $this->per_page);
-    }
-
-    public function pageShow($page_number)
-    {
-
-        $this->page_show = $this->pagination_books[$page_number];
+        return $this->pagination_books[$this->page_number];
 
     }
+
+
 
 }
