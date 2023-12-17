@@ -13,7 +13,7 @@ class BookJsonReaderClass
     {
 
         $json = file_get_contents($file_path,true);
-        $data = json_decode($json);
+        $data = json_decode($json,true);
         $this->books = $data['books'];
 
     }

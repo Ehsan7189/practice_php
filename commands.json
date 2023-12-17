@@ -1,6 +1,6 @@
 {
-  "command_name": "your command",
-  "parameters": [
+  "command_name": "regulation",
+  "parameters": {"ISBN": ["978-1451635126"],  "authorName": ["knkdns"],  "bookTitle": [],  "pagesCount": []}
 
-  ]
+
 }

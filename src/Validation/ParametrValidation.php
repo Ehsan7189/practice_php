@@ -8,17 +8,12 @@ class ParametrValidation
 {
     public array $main_file;
     public $valid = [];
-    public $isbn;
-    public $page;
-    public $author;
-    public $book_name;
-
-    public function __construct(
-        $isbn,
-        $page,
-        $author,
-        $book_name,
-
+    public function __construct
+    (
+        public ?array$isbn=null,
+        public ?array$page=null,
+        public ?array$author=null,
+        public ?array$book_name=null
     )
     {
 
@@ -44,63 +39,75 @@ class ParametrValidation
 
         if (!is_null($isbn)) {
 
-            if (strlen($isbn) === 14) {
-                $Isbn = str_replace('-', '', $isbn);
-                if (is_numeric($Isbn)) {
+            foreach ($isbn as $i) {
+                if (strlen($i) === 14) {
+                    $Isbn = str_replace('-', '', $i);
+                    if (is_numeric($Isbn)) {
+                        $this->valid[] = true;
+                    } else {
+                        $this->valid[] = false;
+
+                    }
+                } else {
+                    $this->valid[] = false;
+
+                }
+
+            }
+
+        }
+    }
+    private function authorValidation($author)
+    {
+            foreach ($author as $a){
+                if (!is_null($a)) {
+
+                    if (is_string($a)) {
+
+                        $this->valid[] = true;
+
+                    } else {
+                        $this->valid[] = false;
+
+                    }
+                }
+            }
+
+    }
+
+    private function titleValidation($name)
+    {
+        foreach ($name as $n){
+            if (!is_null($n)) {
+
+
+                if (is_string($n)) {
+
+                    $this->valid[] = true;
+
+                } else {
+                    $this->valid[] = false;
+
+                }
+            }
+        }
+
+    }
+
+    private function pageValidation($page)
+    {
+        foreach ($page as $p){
+
+            if (!is_null($p)) {
+                if (is_numeric($p)) {
                     $this->valid[] = true;
                 } else {
                     $this->valid[] = false;
 
                 }
-            } else {
-                $this->valid[] = false;
-
             }
         }
-    }
 
-    private function authorValidation($author)
-    {
-
-        if (!is_null($author)) {
-
-            if (is_string($author)) {
-
-                $this->valid[] = true;
-
-            } else {
-                $this->valid[] = false;
-
-            }
-        }
-    }
-
-    private function titleValidation($name)
-    {
-        if (!is_null($name)) {
-
-
-            if (is_string($name)) {
-
-                $this->valid[] = true;
-
-            } else {
-                $this->valid[] = false;
-
-            }
-        }
-    }
-
-    private function pageValidation($page)
-    {
-        if (!is_null($page)) {
-            if (is_numeric($page)) {
-                $this->valid[] = true;
-            } else {
-                $this->valid[] = false;
-
-            }
-        }
     }
 
 }
