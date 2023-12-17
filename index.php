@@ -4,18 +4,39 @@ require_once '.\vendor\autoload.php';
 
 use Lenovo\Assignment\Filereder\Commandreader;
 use Lenovo\Assignment\Validation\ParametrValidation;
-
-$command_json  = new Commandreader('commands.json');
-$commands = $command_json->command;
-$parametrs = $command_json->parametrs;
-
-$isbn=$parametrs['ISBN'];
-$book_title=$parametrs['bookTitle'];
-$author_name=$parametrs['authorName'];
-$pages_count=$parametrs['pagesCount'];
-$vlidation_obj = new ParametrValidation($isbn, $book_title, $author_name, $pages_count);
+use Lenovo\Assignment\Filereder\BookCsvReaderClass;
+use Lenovo\Assignment\Filereder\BookJsonReaderClass;
+use Lenovo\Assignment\Validation\CommandValidation;
+use Lenovo\Assignment\commands\RgulationClass;
 
 
 
+//validation
+$command = new Commandreader('C:\xampp\htdocs\assignment\commands.json');
+$command_name = $command->command;//
+$parametrs = $command->parametrs;
+$validation = new ParametrValidation
+(
+    $parametrs["ISBN"],
+    $parametrs["pagesCount"],
+    $parametrs["authorName"],
+    $parametrs["bookTitle"]
+);
+//print_r($parametrs["ISBN"]);
+$command_validation=new CommandValidation($command_name);
 
-//syntax_namespace_fix
+
+//merge books
+
+$csv_books=new BookCsvReaderClass('C:\xampp\htdocs\assignment\books.csv',['ISBN', 'bookTitle', 'authorName', 'pagesCount', 'publishDate']);
+$json_books=new BookJsonReaderClass('C:\xampp\htdocs\assignment\books.json');
+$books = array_merge($csv_books->books , $json_books->books);
+//print_r($books);
+
+
+$regulate = new RgulationClass($books,$parametrs);
+
+//print_r($books);
+
+
+

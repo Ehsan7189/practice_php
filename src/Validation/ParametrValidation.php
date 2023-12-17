@@ -98,8 +98,8 @@ class ParametrValidation
     {
         foreach ($page as $p){
 
-            if (!is_null($page)) {
-                if (is_numeric($page)) {
+            if (!is_null($p)) {
+                if (is_numeric($p)) {
                     $this->valid[] = true;
                 } else {
                     $this->valid[] = false;

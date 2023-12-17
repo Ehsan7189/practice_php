@@ -2,13 +2,14 @@
 
 namespace Lenovo\Assignment\Filereder;
 
-class BookCsvreader
+class BookCsvReaderClass
 {
-    public $file_path ;
-    public $csv_books;
-    private $vaiadation=['ISBN', 'bookTitle', 'authorName', 'pagesCount', 'publishDate'];
+    
+    public array $csv_books;
+    private $validation;
+    public array $books;
 
-    public function __construct($file_path)
+    public function __construct($file_path,$validation)
     {
         $csv = fopen($file_path,'r');
         fgetcsv($csv);  // Remove First Row
@@ -17,7 +18,7 @@ class BookCsvreader
         }
         foreach ($this->csv_books as $book){
 
-            $book = array_combine($this->vaiadation,$book);
+            $this->books[]= array_combine($validation,$book);
 
         }
 

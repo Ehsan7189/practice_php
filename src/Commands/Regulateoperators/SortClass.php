@@ -1,6 +1,6 @@
 <?php
 
-namespace commands\Regulateoperators;
+namespace Lenovo\Assignment\commands\Regulateoperators;
 
 class SortClass
 {
@@ -9,9 +9,9 @@ class SortClass
     public function __construct($books)
     {
         $array = $books;
-        usort($array, function ($a, $b) {
-            return $a['publishDate'] - $b['publishDate'];
-        });
+        usort($array, function ($a, $b) {return strtotime($a['publishDate']) - strtotime($b['publishDate']);});
+
+
         $books  = $array;
 
     }
