@@ -1,12 +1,11 @@
 <?php
 
-namespace Lenovo\Assignment\Filereder;
-class Commandreader
+namespace Lenovo\Assignment\FileReder;
+class Commander
 {
 
-    public $file_path;
-    public $command;
-    public $parametrs;
+    public mixed $command;
+    public mixed $parameters;
 
 
     public function __construct($file_path)
@@ -15,7 +14,7 @@ class Commandreader
         $json = file_get_contents($file_path, true);
         $data = json_decode($json,true);
         $this->command = $data['command_name'];
-        $this->parametrs = $data['parameters'];
+        $this->parameters = $data['parameters'];
 
     }
 

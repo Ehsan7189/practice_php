@@ -6,7 +6,7 @@ use mysql_xdevapi\Exception;
 
 class CommandValidation
 {
-    private $commands = ['regulation'];
+    private array $commands = ['regulation'];
     public function __construct(public $inserted_command)
     {
 

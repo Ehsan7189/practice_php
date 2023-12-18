@@ -4,10 +4,10 @@ namespace Lenovo\Assignment\Validation;
 
 use mysql_xdevapi\Exception;
 
-class ParametrValidation
+class ParameterValidation
 {
     public array $main_file;
-    public $valid = [];
+    public array $valid = [];
     public function __construct
     (
         public ?array$isbn=null,
@@ -21,8 +21,8 @@ class ParametrValidation
         $this->authorValidation($this->author);
         $this->titleValidation($this->book_name);
         $this->pageValidation($this->page);
-        foreach ($this->valid as $validabl) {
-            if ($validabl === true) {
+        foreach ($this->valid as $validate) {
+            if ($validate === true) {
                 continue;
             } else {
 
@@ -34,7 +34,7 @@ class ParametrValidation
     }
 
 
-    private function isbnValidation($isbn)
+    private function isbnValidation($isbn): void
     {
 
         if (!is_null($isbn)) {
@@ -57,7 +57,7 @@ class ParametrValidation
 
         }
     }
-    private function authorValidation($author)
+    private function authorValidation($author): void
     {
             foreach ($author as $a){
                 if (!is_null($a)) {
@@ -75,7 +75,7 @@ class ParametrValidation
 
     }
 
-    private function titleValidation($name)
+    private function titleValidation($name): void
     {
         foreach ($name as $n){
             if (!is_null($n)) {
@@ -94,7 +94,7 @@ class ParametrValidation
 
     }
 
-    private function pageValidation($page)
+    private function pageValidation($page): void
     {
         foreach ($page as $p){
 

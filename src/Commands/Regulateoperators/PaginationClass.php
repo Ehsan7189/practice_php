@@ -7,14 +7,22 @@ class PaginationClass
 
 
     public array $pagination_books;
-    public $books;
-    public $page_show;
+    public mixed $books;
 
+    public int $per_page = 4;
+    public int $page_number = 1;
 
-    public function __construct($books, public int $page_number=1, public $per_page = 4)
+    public function __construct($books)
     {
-        $this->pagination_books = array_chunk($books, $this->per_page);
-        return $this->pagination_books[$this->page_number];
+
+        $this->paginate($books);
+
+    }
+
+    private function paginate(array$books): void
+    {
+
+        $this->pagination_books = array_chunk($books,$this->per_page);
 
     }
 

@@ -2,46 +2,46 @@
 
 namespace Lenovo\Assignment\commands\Regulateoperators;
 
-use Lenovo\Assignment\Filereder\Commandreader;
 
 class FilterClass
 {
 
-    public array $command_name;
-    public array $command_parametrs;
-    public array $filtered_books;
-    public array $books;
-    public array $command_filters;
+    public array $parameters;
+    public array $filter_names;
+    public array $filtered_books = [];
+    public array $filter_list;
 
-    public function __construct(array $command_name, $books)
+    public function filterList($parameters): void
     {
-        foreach ($command_name as $key => $val) {
-            $this->command_parametrs[] = $key;
-            $this->command_filters[$key] = $val;
-        }
-        $this->filtering($books, $this->command_parametrs, $this->command_filters);
+        foreach ($parameters as $key => $value) {
 
+            $this->filter_names[] = $key;
+            $this->filter_list = $parameters;
+        }
     }
-    private function filtering(array $books, $parametrs, array $filter_list)
-    {$filtered_books = [];
-        foreach ($filter_list as $filters) {
-            foreach ($filters as $filter) {
-                foreach ($parametrs as $parametr) {
-                    foreach ($books as $book) {
-                        if ($book[$parametr] === $filter) {
-                            if (!in_array($book[$parametr], $filtered_books)) {
-                                $filtered_books[] = $books;
-                            } else {
-                                continue;
-                            }
+
+    public function filterApply(array $books): void
+    {
+        foreach ($this->filter_names as $filter_name) {
+            foreach ($this->filter_list[$filter_name] as $filter) {
+                foreach ($books as $book) {
+                    if ($filter === $book[$filter_name]) {
+                        if (!in_array($this->filtered_books, $books)) {
+                            $this->filtered_books[] = $book;
                         } else {
                             continue;
                         }
+                    } else {
+                        continue;
                     }
                 }
             }
+
+
         }
-        $this->books= $filtered_books;
+
+
     }
+
 }
 

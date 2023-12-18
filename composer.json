@@ -13,5 +13,7 @@
             "email": "ehsansayadi7189@gamil.com"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-mysql_xdevapi": "*"
+    }
 }

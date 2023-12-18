@@ -1,12 +1,11 @@
 <?php
 
-namespace Lenovo\Assignment\Filereder;
+namespace Lenovo\Assignment\FileReder;
 
 class BookJsonReaderClass
 {
 
-    public $file_path;
-    public $books;
+    public mixed $books;
 
 
     public function __construct($file_path)

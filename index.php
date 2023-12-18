@@ -2,41 +2,55 @@
 
 require_once '.\vendor\autoload.php';
 
-use Lenovo\Assignment\Filereder\Commandreader;
-use Lenovo\Assignment\Validation\ParametrValidation;
-use Lenovo\Assignment\Filereder\BookCsvReaderClass;
-use Lenovo\Assignment\Filereder\BookJsonReaderClass;
+use Lenovo\Assignment\FileReder\Commander;
+use Lenovo\Assignment\Validation\ParameterValidation;
+use Lenovo\Assignment\FileReder\BookCsvReaderClass;
+use Lenovo\Assignment\FileReder\BookJsonReaderClass;
 use Lenovo\Assignment\Validation\CommandValidation;
-use Lenovo\Assignment\commands\RgulationClass;
-
+use Lenovo\Assignment\commands\RegulationClass;
 
 
 //validation
-$command = new Commandreader('C:\xampp\htdocs\assignment\commands.json');
+$command = new Commander('C:\xampp\htdocs\assignment\commands.json');
 $command_name = $command->command;//
-$parametrs = $command->parametrs;
-$validation = new ParametrValidation
+$parameters = $command->parameters;
+$validation = new ParameterValidation   // change name to IndexValidation
 (
-    $parametrs["ISBN"],
-    $parametrs["pagesCount"],
-    $parametrs["authorName"],
-    $parametrs["bookTitle"]
+    $parameters["ISBN"],
+    $parameters["pagesCount"],
+    $parameters["authorName"],
+    $parameters["bookTitle"]
 );
-//print_r($parametrs["ISBN"]);
-$command_validation=new CommandValidation($command_name);
+
+//switch ($command_name){
+//    case 'index':
+//        break;
+//    case 'show':
+//        break;
+//}
+//print_r($parameters["ISBN"]);
+$command_validation = new CommandValidation($command_name);
+
 
 
 //merge books
 
-$csv_books=new BookCsvReaderClass('C:\xampp\htdocs\assignment\books.csv',['ISBN', 'bookTitle', 'authorName', 'pagesCount', 'publishDate']);
-$json_books=new BookJsonReaderClass('C:\xampp\htdocs\assignment\books.json');
-$books = array_merge($csv_books->books , $json_books->books);
-//print_r($books);
+$csv_books = new BookCsvReaderClass('C:\xampp\htdocs\assignment\books.csv', ['ISBN', 'bookTitle', 'authorName', 'pagesCount', 'publishDate']);
+$json_books = new BookJsonReaderClass('C:\xampp\htdocs\assignment\books.json');
+$books = array_merge($csv_books->books, $json_books->books);
+
+$task1 = new RegulationClass();
+$task1->command_parameters=$parameters;
+$finalBooks = $task1->regulation($books,$parameters);
+foreach ($finalBooks as $book){
+    print '<pre>';
+    var_dump($book);
+    print '</pre>';
+}
+
+//$task1->view();
 
 
-$regulate = new RgulationClass($books,$parametrs);
-
-//print_r($books);
 
 
 

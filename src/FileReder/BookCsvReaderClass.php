@@ -1,12 +1,11 @@
 <?php
 
-namespace Lenovo\Assignment\Filereder;
+namespace Lenovo\Assignment\FileReder;
 
 class BookCsvReaderClass
 {
     
     public array $csv_books;
-    private $validation;
     public array $books;
 
     public function __construct($file_path,$validation)

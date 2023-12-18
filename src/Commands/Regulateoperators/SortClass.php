@@ -10,9 +10,6 @@ class SortClass
     {
         $array = $books;
         usort($array, function ($a, $b) {return strtotime($a['publishDate']) - strtotime($b['publishDate']);});
-
-
-        $books  = $array;
-
+        $this->books  = $array;
     }
 }
